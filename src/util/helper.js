@@ -8,3 +8,4 @@ function getBatchInfo(message){
 module.exports.dateInfo= theDay;
 module.exports.month = month;
 module.exports.batchInfo= getBatchInfo;
+//module.exports.Date=
