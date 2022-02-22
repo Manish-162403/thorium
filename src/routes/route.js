@@ -13,8 +13,8 @@ router.get('/test-me', function (req, res) {
     obj.welcome()
     console.log(obj.welcome)
 
-  console.log('printDate: ', helper.printDate);
-  console.log('printMonth: ', helper.printMonth+1);
+  console.log('printDate: ', obj1.printDate);
+  console.log('printMonth: ', obj1.printMonth+1);
   helper.printBatchInfo("thorium, w3d1, the topic for today is Nodejs module system.")
     
   myObj.myTrim()
@@ -44,6 +44,8 @@ router.get('/hello', function (req, res){
    const arr3 = [["horror","The Shining"],["drama","Titanic"],["thriller","ShutterIsland"],["fantasy","Pans Labyrinth"]]
    const out4 = lodash.fromPairs(arr3)
    console.log(out4);
+
+   res.send('My first hello api!')
 });
 
 module.exports = router;
