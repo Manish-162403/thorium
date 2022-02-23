@@ -32,7 +32,7 @@ router.get('/movies/:movieId', function(req,res){
      }
     })
 //-----------------------------------------------------------------------------------------------------------------------------------
-    router.get('/moviez',function(req,res){
+    router.get('/films',function(req,res){
        res.send([ {id: 1,name:'The Shining' }, {id: 2, name:'Incendies' }, {id: 3,name: 'Rang de Basanti'}, {id: 4, name: 'welcome' },{id: 5, name: 'Finding Demo' }])
     })
 //------------------------------------------------------------------------------------------------------------------------------------   
