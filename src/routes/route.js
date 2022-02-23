@@ -95,4 +95,15 @@ router.get('/movies/:movieId', function(req,res){
             res.send(  { data: missingNumber  }  );
   });
 
+
+  router.get("/sol2", function (req, res) {
+
+  
+
+
+
+
+
+
+
 module.exports = router;
