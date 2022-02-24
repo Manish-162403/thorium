@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post("/players", function(req, res) {
  let players =  [ {
-        "name": "gopal",
+        "name": "bhuvan",
         "dob": "1/09/1995",
         "gender": "male",
         "city": "delhi",
