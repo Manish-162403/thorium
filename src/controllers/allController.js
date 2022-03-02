@@ -53,9 +53,7 @@ const authorsName = async function (req,res) {
 
  for(let i=0; i<id.length; i++) {
  let x = id[i]
- const author = await
-
-authorModel.find({author_id:x}).select({author_name:1, _id:0})
+ const author = await authorModel.find({author_id:x}).select({author_name:1, _id:0})
 temp.push(author)
  }
  
