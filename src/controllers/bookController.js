@@ -40,7 +40,7 @@ const getBooksWithAuthorDetails = async function (req, res) {
 
 const putBook= async function (req,res){
     const update = await bookModel.updateMany({$or: [{"publisher":"622070b4c28ff7692653cf65" },{"publisher": "62207073c28ff7692653cf5d"}]},{"isHardCover" : true});
-     res.send({msg:update})
+     res.send({msg:"The isHardCover value is updated with these two id's"})
    }
 
 
