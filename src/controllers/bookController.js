@@ -38,25 +38,24 @@ const getBooksWithAuthorDetails = async function (req, res) {
 }
 
 
-// const putUpdateData= async function (req, res) {
-//     let putpublbooks = await publisherModel.find({publisher:'Penguin' ,'HarperCollins'});
-//     const id = putpublbooks[0]._id
-//     res.send({data: books})
-// }
+const putBook= async function (req,res){
+    const update = await bookModel.updateMany({$or: [{"publisher":"622070b4c28ff7692653cf65" },{"publisher": "62207073c28ff7692653cf5d"}]},{"isHardCover" : true});
+     res.send({msg:update})
+   }
 
 
 
 
 const increaseSale= async function (req, res) {
     let increasePrice = await bookModel.updateMany({ratings:{$gt:3.5}},{$inc : {price: +10}});
-  //  const id = putpublbooks[0]._id
+
     res.send({msg: "Pirice Changed successfully Check your Database for updated price"})
 }
-
+  //  const id = putpublbooks[0]._id
 
 module.exports.createBook = createBook
  module.exports.getBooksData = getBooksData
 module.exports.getBooksWithAuthorDetails = getBooksWithAuthorDetails
-//module.exports.putUpdateData = putUpdateData
+module.exports.putBook = putBook
 module.exports.increaseSale=increaseSale
 //find().select(author_id)
