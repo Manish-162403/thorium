@@ -1,14 +1,14 @@
     const mongoose = require('mongoose');
-    let objectId = mongoose.Schema.Types.objectId
+    let ObjectId = mongoose.Schema.Types.ObjectId
 
     const purchaseSchema = new mongoose.Schema( {
 
         userId:{
-            type: objectId,
+            type: ObjectId,
             ref: "newUser"
         } ,
         productId: {
-            type: objectId,
+            type: ObjectId,
             ref: "Product"
         },
         
