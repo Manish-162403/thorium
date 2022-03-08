@@ -14,9 +14,9 @@ router.post("/users", userController.createUser  )
 router.post("/login", userController.loginUser)
 
 //The userId is sent by front end
-router.get("/users/:userId", userController.getUserData)
+router.get("/users/:userId",tokenCheck.tokenCheck, userController.getUserData)
 
-router.put("/users/:userId",tokenCheck.tokenCheck, userController.updateUser)
+router.put("/users/:userId",tokenCheck.tokenCheck,userController.updateUser)
 
 router.delete("/users/:userId",tokenCheck.tokenCheck, userController.deleteUser)
 

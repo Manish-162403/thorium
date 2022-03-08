@@ -1,6 +1,5 @@
 const jwt = require("jsonwebtoken");
 const userModel = require("../models/userModel");
-
 const tokenCheck = require("../Middleware/auth");
 
 const createUser = async function (abcd, xyz) {
@@ -72,7 +71,7 @@ const updateUser = async function (req, res) {
     return res.send("No such user exists");
   }
 let userUpdatedNumber = req.body.mobile;
-  let updatedUserMoblieNumber = await userModel.findOneAndUpdate({_id:userId},{$set: {mobile:userUpdatedNumber}},{upsert:true,new:true});
+  let updatedUserMoblieNumber = await userModel.findOneAndUpdate({_id:newId},{$set: {mobile:userUpdatedNumber}},{upsert:true,new:true});
   res.send({ status: user, data: updatedUserMoblieNumber });
 };
 
@@ -80,7 +79,7 @@ let userUpdatedNumber = req.body.mobile;
 const isdeletedUser = async function (req, res) {
     let isDeletedId = req.params.userId;
     let isDeletedProperty = await userModel.findByIdAndUpdate({_id:isDeletedId},{$set: {isDeleted:true}},{new:true});
-    res.send({ status: true, data: isdeletedUser });
+    res.send({ status: true, data: isDeletedProperty });
   };
   
 
