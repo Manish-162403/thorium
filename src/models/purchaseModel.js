@@ -3,18 +3,21 @@
 
     const purchaseSchema = new mongoose.Schema( {
 
-        userId:{
-            type: ObjectId,
-            ref: "newUser"
-        } ,
-        productId: {
-            type: ObjectId,
-            ref: "Product"
-        },
-        
-        amount: 0,
-        isFreeAppUser: true, 
-        date: String
+            userId:{
+                type: ObjectId,
+                ref: "newUser"
+            } ,
+            productId: {
+                type: ObjectId,
+                ref: "Product"
+            },
+            
+            amount: 0,
+            isFreeAppUser: {
+                type:Boolean,
+                default: false},
+                
+            date: String
         })
 
 
