@@ -39,17 +39,17 @@ const loginUser = async function (req, res) {
 
 
 const getUserData = async function (req, res) {
-  let token = req.headers["x-Auth-token"];
-  if (!token) token = req.headers["x-auth-token"];
+  // let token = req.headers["x-Auth-token"];
+  // if (!token) token = req.headers["x-auth-token"];
 
 
-  if (!token) return res.send({ status: false, msg: "token must be present" });
+  // if (!token) return res.send({ status: false, msg: "token must be present" });
 
-  console.log(token);
+  // console.log(token);
   
-  let decodedToken = jwt.verify(token, "functionup-thorium");
-  if (!decodedToken)
-    return res.send({ status: false, msg: "token is invalid" });
+  // let decodedToken = jwt.verify(token, "functionup-thorium");
+  // if (!decodedToken)
+  //   return res.send({ status: false, msg: "token is invalid" });
 
   let userId = req.params.userId;
   let userDetails = await userModel.findById(userId);
@@ -70,9 +70,9 @@ const updateUser = async function (req, res) {
   if (!user) {
     return res.send("No such user exists");
   }
-let userUpdatedNumber = req.body.mobile;
-  let updatedUserMoblieNumber = await userModel.findOneAndUpdate({_id:newId},{$set: {mobile:userUpdatedNumber}},{upsert:true,new:true});
-  res.send({ status: user, data: updatedUserMoblieNumber });
+let userUpdatedNumber = req.body;
+  let updatedUser = await userModel.findOneAndUpdate({_id:newId},userUpdatedNumber,{new:true});
+  res.send({ status: user, data: updatedUser });
 };
 
 
