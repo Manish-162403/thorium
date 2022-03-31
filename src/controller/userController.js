@@ -49,7 +49,7 @@ const createUser = async function (req, res) {
             return res.status(400).send({ status: false, message: "Mobile number is required" })
         }
 
-        if (!/^([+]\d{2})?\d{10}$/.test(data.phone)) {
+        if (!(/^([+]\d{2})?\d{10}$/.test(data.phone))) {
             return res.status(400).send({ status: false, message: "Please provide a valid moblie Number" })
         }
 
@@ -135,7 +135,7 @@ const userLogin = async function (req, res) {
         const secretKey = "group17project3almostdone"
 
        // creating JWT
-        const token = jwt.sign(payLoad, secretKey,  {expiresIn : "1hr"})
+        const token = jwt.sign(payLoad, secretKey,  {expiresIn : "10s"})
         
         res.header("group17", token)
 

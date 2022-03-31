@@ -97,8 +97,6 @@ const createBook = async function (req, res) {
 
         }
       
-
-
         if (!(/^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/.test(releasedAt.trim()))) {
 
             return res.status(400).send({ status: false, message: 'Not invalid format, please enter date in YYYY-MM-DD format' })
@@ -232,7 +230,7 @@ const bookById = async function (req, res) {
 
         const book = await bookModel
             .findOne({_id: bookId, isDeleted: false })
-            .select({ bookId: 1, title: 1, excerpt: 1, userId: 1, category: 1,reviews:reviewData.length, releasedAt: 1, reviewsData:reviewData });
+            .select({ bookId: 1, title: 1, excerpt: 1, userId: 1, category: 1,reviews:1, releasedAt: 1, reviewsData:reviewData });
 
         if (!book) {
 

@@ -17,11 +17,7 @@ const authenticate = async function(req, res, next){
         return res.status(401).send({status : false, message: "authentication failed"})
         }
 
-        let time = Math.floor(Date.now()/1000)
-        if(decodedToken.exp< time){
-            return res.status(401).send({status: false, message: "Token is expired Relogin"})
-        }
-        // setting a key in request,  "decodedToken" which consist userId and exp.
+         // setting a key in request,  "decodedToken" which consist userId and exp.
         req.decodedToken = decodedToken
         
         next()
@@ -36,14 +32,7 @@ const authorise = async function(req, res,next){
     try{
         const bookId = req.params.bookId
         const decodedToken = req.decodedToken
-
-        let time = Math.floor(Date.now()/1000)
-
-        if(decodedToken.exp< time){
-            
-            return res.status(401).send({status: false, message: "Token is expired Relogin"})
-        }
-       
+           
         if(mongoose.Types.ObjectId.isValid(bookId) == false){
         return res.status(400).send({status : false, message : "bookId is not valid"})
         }
