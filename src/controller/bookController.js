@@ -4,6 +4,8 @@ const mongoose = require('mongoose')
 const reviewModel = require('../models/reviewModel')
 
 
+// ...................Function Validation.................................................
+
 
 const isValid = function (value) {
     if (typeof value == undefined || value == null) return false
@@ -24,7 +26,7 @@ const isValidobjectId = (objectId) => {
 }
 
 
-//................................createBook...........................................
+//................................Third Api createBook...........................................
 const createBook = async function (req, res) {
     try {
         const data = req.body
@@ -34,6 +36,7 @@ const createBook = async function (req, res) {
 
 
         if (isValidRequestBody(query)) {
+<<<<<<< HEAD
 
              return res.status(400).send({ status: false, message: 'This operation is not allowed' })
 
@@ -44,6 +47,14 @@ const createBook = async function (req, res) {
              return res.status(400).send({ status: false, message: 'Please insert valid data' })
 
              }
+=======
+            return res.status(400).send({ status: false, error: 'this is not allowed' })
+        }
+
+        if (!isValidRequestBody(data)) {
+            return res.status(400).send({ status: false, error: 'please insert valid data' })
+        }
+>>>>>>> 8db0e95e2a7f40c09a7e269df3387677be4ec7d6
 
 
 
@@ -70,22 +81,34 @@ const createBook = async function (req, res) {
             return res.status(400).send({ status: false, message: 'User Id is required' })
 
         }
+<<<<<<< HEAD
 
         if(!isValidobjectId(userId)){
 
             return  res.status(400).send({status : false, message : `enter a valid userId`})
 
             }
+=======
+        if (!isValidobjectId(userId)) {
+            return res.status(400).send({ status: false, message: `enter a valid userId` })
+        }
+>>>>>>> 8db0e95e2a7f40c09a7e269df3387677be4ec7d6
 
         if (!isValid(ISBN)) {
 
             return res.status(400).send({ status: false, error: 'ISBN is required' })
 
         }
+<<<<<<< HEAD
         if(!/^(97(8|9))?\d{9}(\d|X)$/.test(ISBN.split("-").join(""))){
 
             return  res.status(400).send({status : false, message : `Enter a valid ISBN of 13 digits`})    
             }
+=======
+        if (!/^(97(8|9))?\d{9}(\d|X)$/.test(ISBN.split("-").join(""))) {
+            return res.status(400).send({ status: false, message: `enter a valid ISBN of 13 digits` })
+        }
+>>>>>>> 8db0e95e2a7f40c09a7e269df3387677be4ec7d6
 
         if (!isValid(category)) {
 
@@ -109,17 +132,25 @@ const createBook = async function (req, res) {
         const duplicateTitle = await bookModel.findOne({ title })
 
         if (duplicateTitle) {
+<<<<<<< HEAD
 
            return res.status(400).send({status:false, message: 'This title already exist' })
 
+=======
+            return res.status(400).send({ error: 'this title already exist' })
+>>>>>>> 8db0e95e2a7f40c09a7e269df3387677be4ec7d6
         }
 
         const duplicateISBN = await bookModel.findOne({ ISBN })
 
         if (duplicateISBN) {
+<<<<<<< HEAD
 
            return res.status(400).send({status:false, message: 'ISBN already exist' })
 
+=======
+            return res.status(400).send({ error: 'ISBN already exist' })
+>>>>>>> 8db0e95e2a7f40c09a7e269df3387677be4ec7d6
         }
 
 
@@ -129,8 +160,12 @@ const createBook = async function (req, res) {
 
 
         let savedBook = await bookModel.create(bookBody)
+<<<<<<< HEAD
 
        return res.status(201).send({ status: true, data: savedBook })
+=======
+        return res.status(201).send({ status: true, data: savedBook })
+>>>>>>> 8db0e95e2a7f40c09a7e269df3387677be4ec7d6
 
     }
     catch (err) {
@@ -140,18 +175,25 @@ const createBook = async function (req, res) {
     }
 }
 
-//.............................................get book...............................
+//....................................fourth Api get book................................................
 
 
 const getBook = async function (req, res) {
     try {
-        
+
         const data = req.body
         const query = req.query
         const filter = { isDeleted: false }
+<<<<<<< HEAD
   
           
         
+=======
+
+
+
+
+>>>>>>> 8db0e95e2a7f40c09a7e269df3387677be4ec7d6
         if (isValidRequestBody(data)) {
 
             return res.status(400).send({ status: false, message: 'This operation is not allowed' })
@@ -163,6 +205,7 @@ const getBook = async function (req, res) {
 
             const { userId, category, subcategory } = query
 
+<<<<<<< HEAD
             if(req.query.userId){
 
                 if(!(isValid(req.query.userId) && isValidobjectId(req.query.userId))){
@@ -173,9 +216,28 @@ const getBook = async function (req, res) {
 
                  filter['userId'] = req.query.userId 
 
-            }
-            
+=======
+            if (req.query.userId) {
+                if (!(isValid(req.query.userId) && isValidobjectId(req.query.userId))) {
+                    return res.status(400).send({ status: false, error: 'userId not valid' })
 
+                }
+                filter['userId'] = req.query.userId
+>>>>>>> 8db0e95e2a7f40c09a7e269df3387677be4ec7d6
+            }
+
+
+<<<<<<< HEAD
+=======
+            // if (isValid(userId)) {
+            //     const userid = await bookModel.find({ userId })
+
+
+
+
+            // }
+
+>>>>>>> 8db0e95e2a7f40c09a7e269df3387677be4ec7d6
             if (isValid(category)) {
 
                 const cateogrised = await bookModel.find({ category })
@@ -215,15 +277,16 @@ const getBook = async function (req, res) {
 }
 
 
-//.........................book By iD.............................................................
+//.........................Fifth Api book By iD.............................................................
 
 
 const bookById = async function (req, res) {
     try {
-        
-        
+
+
         let bookId = req.params.bookId;
 
+<<<<<<< HEAD
         if(!isValidobjectId(bookId)){return res.status(400).send({status:false, message: "Please input valid book Id"})}
 
         const reviewData = await reviewModel.find({bookId:bookId,isDeleted:false})
@@ -232,6 +295,14 @@ const bookById = async function (req, res) {
         const book = await bookModel
             .findOne({_id: bookId, isDeleted: false })
             .select({ bookId: 1, title: 1, excerpt: 1, userId: 1, category: 1,reviews:1, releasedAt: 1, reviewsData:reviewData });
+=======
+        const reviewData = await reviewModel.find({ bookId: bookId, isDeleted: false })
+
+
+        const book = await bookModel
+            .findOne({ bookId, isDeleted: false })
+            .select({ bookId: 1, title: 1, excerpt: 1, userId: 1, category: 1, reviews: 1, releasedAt: 1, reviewsData: reviewData });
+>>>>>>> 8db0e95e2a7f40c09a7e269df3387677be4ec7d6
 
         if (!book) {
 
@@ -253,7 +324,7 @@ const bookById = async function (req, res) {
 
 
 
-//............................................updateBook by Id...............................
+//......................................sixth Api updateBook by Id...............................
 
 
 const updateBook = async function (req, res) {
@@ -267,10 +338,16 @@ const updateBook = async function (req, res) {
 
         if (bookToBeModified) {
 
+<<<<<<< HEAD
            
+=======
+
+
+
+>>>>>>> 8db0e95e2a7f40c09a7e269df3387677be4ec7d6
             if (Object.keys(data) != 0) {
 
-               
+
                 if (bookToBeModified.isDeleted == false) {
 
 
@@ -284,6 +361,7 @@ const updateBook = async function (req, res) {
                     }
 
 
+<<<<<<< HEAD
                     let checkexcerpt = await bookModel.findOne({excerpt:data.excerpt})
 
                     if(checkexcerpt){
@@ -306,6 +384,21 @@ const updateBook = async function (req, res) {
 
                         return res.status(400).send({status: false, message: "the ISBN you want to update is alreadu updated"})
                     
+=======
+                    let checkexcerpt = await bookModel.findOne({ excerpt: data.excerpt })
+                    if (checkexcerpt) {
+                        return res.status(400).send({ status: false, ERROR: "the excerpt you want to update is alreadu updated" })
+                    }
+
+                    let checkreleasedAt = await bookModel.findOne({ releasedAt: data.releasedAt })
+                    if (checkreleasedAt) {
+                        return res.status(400).send({ status: false, ERROR: "the releasedAt you want to update is alreadu updated" })
+                    }
+
+                    let checkISBN = await bookModel.findOne({ ISBN: data.ISBN })
+                    if (checkISBN) {
+                        return res.status(400).send({ status: false, ERROR: "the ISBN you want to update is alreadu updated" })
+>>>>>>> 8db0e95e2a7f40c09a7e269df3387677be4ec7d6
                     }
 
                     if (isValid(data.title)) { filter['title'] = data.title }
@@ -343,7 +436,7 @@ const updateBook = async function (req, res) {
 }
 
 
-//.....................................deleteBook By.........................................
+//.....................................Seventh Api deleteBook By Id.........................................
 
 
 let deleteBookById = async function (req, res) {

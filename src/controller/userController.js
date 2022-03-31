@@ -1,6 +1,8 @@
 const userModel = require("../models/userModel")
 const jwt = require("jsonwebtoken")
 
+// ...........................Function for Validaion..................................
+
 const isValid = function (value) {
     if (typeof value == undefined || value == null) return false
     if (typeof value === 'string' && value.trim().length === 0) return false
@@ -15,7 +17,7 @@ const isvalidTitle = function (title) {
 }
 
 
-// createUser.....................................................................
+//  .............................first Api createUser.....................................................................
 
 const createUser = async function (req, res) {
 
@@ -49,8 +51,13 @@ const createUser = async function (req, res) {
             return res.status(400).send({ status: false, message: "Mobile number is required" })
         }
 
+<<<<<<< HEAD
         if (!(/^([+]\d{2})?\d{10}$/.test(data.phone))) {
             return res.status(400).send({ status: false, message: "Please provide a valid moblie Number" })
+=======
+        if (!(/^([+]\d{2})?\d{10}$/.test(data.phone)) {
+            return res.status(400).send({ status: false, msg: "please provide a valid moblie Number" })
+>>>>>>> 8db0e95e2a7f40c09a7e269df3387677be4ec7d6
         }
 
         let duplicateMobile = await userModel.findOne({ phone: data.phone })
@@ -92,7 +99,7 @@ const createUser = async function (req, res) {
     }
 }
 
-// user login..............................................................................
+// .................................second Api user login..............................................................................
 
 const userLogin = async function (req, res) {
 
@@ -129,6 +136,7 @@ const userLogin = async function (req, res) {
             return res.status(404).send({ status: false, message: "User not  found" })
         }
 
+<<<<<<< HEAD
        
         const userID = user._id        
         const payLoad = {userId : userID }
@@ -137,12 +145,31 @@ const userLogin = async function (req, res) {
        // creating JWT
         const token = jwt.sign(payLoad, secretKey,  {expiresIn : "10s"})
         
+=======
+        // const token = jwt.sign({
+        //     userId: data.email._id,
+        // },
+        //     "project3group17",
+        //     { expiresIn: '1hr' })
+        const userID = user._id
+        const payLoad = { userId: userID }
+        const secretKey = "group17project3almostdone"
+
+        // creating JWT
+
+        const token = jwt.sign(payLoad, secretKey, { expiresIn: "1hr" })
+
+>>>>>>> 8db0e95e2a7f40c09a7e269df3387677be4ec7d6
         res.header("group17", token)
 
-        res.status(200).send({status: true, message: "login successful" , data: token})
+        res.status(200).send({ status: true, message: "login successful", data: token })
 
     } catch (err) {
+<<<<<<< HEAD
        return res.status(500).send({ status: false, message: err.message })
+=======
+        return res.status(500).send({ status: false, ERROR: err.message })
+>>>>>>> 8db0e95e2a7f40c09a7e269df3387677be4ec7d6
     }
 }
 
