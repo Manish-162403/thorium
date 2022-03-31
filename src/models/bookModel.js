@@ -40,7 +40,7 @@ const bookSchema = new mongoose.Schema({
     reviews: {
         type:Number,
         default: 0,
-        comment:Number
+       
     },
     deletedAt: {
         type:Date
@@ -54,8 +54,7 @@ const bookSchema = new mongoose.Schema({
     releasedAt: {
         type:Date,
         required:true,
-        // default:Date.now(),
-        
+               
     }
 
 
