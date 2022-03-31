@@ -1,3 +1,4 @@
+
 const jwt = require('jsonwebtoken')
 const { default: mongoose } = require('mongoose')
 const bookModel = require('../models/bookModel')
@@ -17,15 +18,7 @@ const authenticate = async function(req, res, next){
         return res.status(401).send({status : false, message: "authentication failed"})
         }
 
-<<<<<<< HEAD
          // setting a key in request,  "decodedToken" which consist userId and exp.
-=======
-        let time = Math.floor(Date.now()/1000)
-        if(decodedToken.exp< time){
-            return res.status(401).send({status: false, message: "Token is expired Relogin"})
-        }
-        // setting a key in request,  "decodedToken" which consist userId and exp.
->>>>>>> 8db0e95e2a7f40c09a7e269df3387677be4ec7d6
         req.decodedToken = decodedToken
         
         next()
@@ -40,18 +33,7 @@ const authorise = async function(req, res,next){
     try{
         const bookId = req.params.bookId
         const decodedToken = req.decodedToken
-<<<<<<< HEAD
            
-=======
-
-        let time = Math.floor(Date.now()/1000)
-
-        if(decodedToken.exp< time){
-            
-            return res.status(401).send({status: false, message: "Token is expired Relogin"})
-        }
-       
->>>>>>> 8db0e95e2a7f40c09a7e269df3387677be4ec7d6
         if(mongoose.Types.ObjectId.isValid(bookId) == false){
         return res.status(400).send({status : false, message : "bookId is not valid"})
         }
@@ -75,6 +57,3 @@ const authorise = async function(req, res,next){
 
 module.exports.authenticate = authenticate
 module.exports.authorise = authorise
-
-
-    
