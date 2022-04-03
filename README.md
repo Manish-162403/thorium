@@ -332,3 +332,4 @@ Refer below sample
 ```
 
 
+- Upload/accept an image as book cover in your previous assignment and upload it to s3 and save the link in your databse

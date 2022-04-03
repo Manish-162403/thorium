@@ -108,11 +108,11 @@ const userLogin = async function (req, res) {
         }
 
         if (!isValid(data.email)) {
-            return res.status(401).send({ status: false, message: "Please input valid emailId" })
+            return res.status(400).send({ status: false, message: "Please input valid emailId" })
         }
 
         if (!(/^\w+([\.-]?\w+)@\w+([\. -]?\w+)(\.\w{2,3})+$/.test(data.email))) {
-            return res.status(400).send({ status: false, message: "Please provide a valid email" });
+            return res.status(401).send({ status: false, message: "Please provide a valid email" });
         }
 
         if (!isValid(data.password)) {
@@ -121,7 +121,7 @@ const userLogin = async function (req, res) {
 
         if (!(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,15}$/.test(data.password))) {
 
-            return res.status(400).send({ status: false, message: "please provide a valid password with one uppercase letter ,one lowercase, one character and one number " })
+            return res.status(400).send({ status: false, message: "please provide a valid password with one uppercase letter ,one lowercase, one character and one number and length should be 8 to 15 " })
         }
 
         const user = await userModel.findOne({ email: data.email, password: data.password })
@@ -135,11 +135,11 @@ const userLogin = async function (req, res) {
         const secretKey = "group17project3almostdone"
 
        // creating JWT
-        const token = jwt.sign(payLoad, secretKey,  {expiresIn : "10s"})
+        const token = jwt.sign(payLoad, secretKey,  {expiresIn : "10hr"})
         
         res.header("group17", token)
 
-        res.status(200).send({status: true, message: "login successful" , data: token})
+       return res.status(200).send({status: true, message: "login successful" , data: token})
 
     } catch (err) {
        return res.status(500).send({ status: false, message: err.message })

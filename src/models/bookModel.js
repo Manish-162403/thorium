@@ -12,7 +12,7 @@ const bookSchema = new mongoose.Schema({
 
     excerpt: {
         type: String,
-        requred: true
+        required: true
     },
 
     userId: {
@@ -32,6 +32,10 @@ const bookSchema = new mongoose.Schema({
         required: true
     },
 
+bookCover:{
+    type:String
+},
+
     subcategory: [{
         type: String,
         required: true
@@ -41,7 +45,6 @@ const bookSchema = new mongoose.Schema({
         type: Number,
         default: 0,
 
-        comment: Number
 
     },
     deletedAt: {

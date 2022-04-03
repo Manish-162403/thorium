@@ -1,13 +1,14 @@
-const userModel = require('../models/userModel')
 const bookModel = require('../models/bookModel')
 const mongoose = require('mongoose')
 const reviewModel = require('../models/reviewModel')
+const { findOne } = require('../models/bookModel')
 
 
 
 const isValid = function (value) {
-    if (typeof value == undefined || value == null) return false
+    if (typeof value == undefined || value == null || value == NaN) return false
     if (typeof value === 'string' && value.trim().length === 0) return false
+    if (typeof value === 'Number' && value.trim().length === 0) return false
     return true
 }
 const isValidRequestBody = function (requestBody) {
@@ -29,7 +30,7 @@ const createBook = async function (req, res) {
         const data = req.body
         const query = req.query
 
-        const { title, excerpt, userId, ISBN, category, subcategory, reviews, releasedAt } = data
+        const { title, excerpt, userId, ISBN,bookCover, category, subcategory, reviews, releasedAt } = data
 
 
         if (isValidRequestBody(query)) {
@@ -44,8 +45,9 @@ const createBook = async function (req, res) {
 
              }
 
-
-
+     
+   const books = await bookModel.findOne({bookCover: bookCover})
+   if(books){return res.status(400).send({status:false, message: "url already exist"})}
         // vaidations for data
         if (!isValidDate(releasedAt)) {
 
@@ -83,7 +85,7 @@ const createBook = async function (req, res) {
         }
         if(!/^(97(8|9))?\d{9}(\d|X)$/.test(ISBN.split("-").join(""))){
 
-            return  res.status(400).send({status : false, message : `Enter a valid ISBN of 13 digits`})    
+            return res.status(400).send({status : false, message : `Enter a valid ISBN of 13 digits`})    
             }
 
         if (!isValid(category)) {
@@ -123,7 +125,7 @@ const createBook = async function (req, res) {
 
 
 
-        const bookBody = { title, excerpt, userId, ISBN, category, subcategory, reviews, releasedAt }
+        const bookBody = { title, excerpt, userId, ISBN, bookCover, category, subcategory, reviews, releasedAt }
 
 
 
@@ -162,7 +164,7 @@ const getBook = async function (req, res) {
 
             const { userId, category, subcategory } = query
 
-            if(req.query.userId){
+            if(userId){
 
                 if(!(isValid(req.query.userId) && isValidobjectId(req.query.userId))){
 
